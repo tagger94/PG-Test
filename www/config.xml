@@ -70,6 +70,8 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
     <plugin spec="https://github.com/texh/cordova-plugin-stepcounter.git"/>
+    <!--<plugin spec="https://github.com/litehelpers/Cordova-sqlite-storage.git"/>-->
+    <!--<plugin spec="https://github.com/thgreasi/localForage-cordovaSQLiteDriver.git"/>-->
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />

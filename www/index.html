@@ -12,11 +12,7 @@
 
 <body>
     <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
+        
         <button id='getToday' onclick='stepcounter.getTodayStepCount(app.success, app.failure)'>Today</button>
         <button id='getTotal' onclick='stepcounter.getTotalStepCount(app.success, app.failure)'>Total</button>
     </div>
@@ -24,10 +20,9 @@
     <script type="text/javascript" src="stepcounter.js"></script>
     <script type="text/javascript" src="js/jquery-2.2.2.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    
+
     <script type="text/javascript">
         app.initialize();
-
     </script>
 </body>
 

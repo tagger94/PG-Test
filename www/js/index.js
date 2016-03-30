@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        
+
         // Start the step counter
         // startingOffset will be added to the total steps counted in this session.
         // ie. say you have already recorded 150 steps for a certain activity, then
@@ -52,15 +52,13 @@ var app = {
 
 
         // Get the amount of steps for today (or -1 if it no data given)
-        $("button#getToday").click(function () {
+        $("button#getToday").click(function() {
             stepcounter.getTodayStepCount(success, failure);
-            //success("bound");
         });
 
         // Get the amount of steps since the service is started (it is actually reseted to 0 when the service is killed by the system)
-        $("button#getTotal").click(function () {
+        $("button#getTotal").click(function() {
             stepcounter.getStepCount(success, failure);
-            //success("bound");
         });
 
         // Get the step history (JavaScript object)
@@ -70,7 +68,7 @@ var app = {
         //  "2015-01-02":{"offset": 579, "steps": 789}
         //  ...
         //}
-        
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
