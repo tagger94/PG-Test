@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         //app.receivedEvent('deviceready');
+        alert("READY");
 
         // Start the step counter
         // startingOffset will be added to the total steps counted in this session.
