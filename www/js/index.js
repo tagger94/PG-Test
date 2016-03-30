@@ -34,6 +34,47 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+        var success = function(message) {
+            alert(message);
+        }
+
+        var failure = function() {
+            alert("Error calling CordovaStepCounter Plugin");
+        }
+
+        // Start the step counter
+        // startingOffset will be added to the total steps counted in this session.
+        // ie. say you have already recorded 150 steps for a certain activity, then
+        // the step counter records 50. The getStepCount method will then return 200.
+        var startingOffset = 0;
+        stepcounter.start(startingOffset, success, failure);
+
+        // Stop the step counter
+        stepcounter.stop(success, failure);
+
+        // Get the amount of steps for today (or -1 if it no data given)
+        stepcounter.getTodayStepCount(success, failure);
+
+        // Get the amount of steps since the service is started (it is actually reseted to 0 when the service is killed by the system)
+        stepcounter.getStepCount(success, failure);
+
+        // Returns true/false if Android device is running >API level 19 && has the step counter API available
+        stepcounter.deviceCanCountSteps(success, failure);
+
+        // Get the step history (JavaScript object)
+        // sample result :
+        //{
+        //  "2015-01-01":{"offset": 123, "steps": 456},
+        //  "2015-01-02":{"offset": 579, "steps": 789}
+        //  ...
+        //}
+        stepcounter.getHistory(
+            function(historyData) {
+                success(historyData);
+            },
+            failure
+        );
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
