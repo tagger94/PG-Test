@@ -22,34 +22,12 @@
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="stepcounter.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/jquery-2.2.2.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    
     <script type="text/javascript">
         app.initialize();
-/*
-        // Get the amount of steps for today (or -1 if it no data given)
-        $("button#getToday").click({
-            stepcounter.getTodayStepCount(app.success, app.failure);
-        });
 
-        // Get the amount of steps since the service is started (it is actually reseted to 0 when the service is killed by the system)
-        $("button#getToday").click({
-            stepcounter.getStepCount(app.success, app.failure);
-        });
-*/
-        // Get the step history (JavaScript object)
-        // sample result :
-        //{
-        //  "2015-01-01":{"offset": 123, "steps": 456},
-        //  "2015-01-02":{"offset": 579, "steps": 789}
-        //  ...
-        //}
-        // stepcounter.getHistory(
-        //     function(historyData) {
-        //         success(historyData);
-        //     },
-        //     failure
-        // );
     </script>
 </body>
 

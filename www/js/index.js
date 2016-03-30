@@ -20,14 +20,6 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-        
-        this.success = function(message) {
-            alert(message);
-        }
-
-        this.failure = function() {
-            alert("Error calling CordovaStepCounter Plugin");
-        }
     },
     // Bind Event Listeners
     //
@@ -35,6 +27,13 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+
+        // Start the step counter
+        // startingOffset will be added to the total steps counted in this session.
+        // ie. say you have already recorded 150 steps for a certain activity, then
+        // the step counter records 50. The getStepCount method will then return 200.
+        var startingOffset = 10;
+        stepcounter.start(startingOffset, success, failure);
     },
     // deviceready Event Handler
     //
@@ -43,26 +42,28 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        
+        success = function(message) {
+            alert(message);
+        }
 
-        // Start the step counter
-        // startingOffset will be added to the total steps counted in this session.
-        // ie. say you have already recorded 150 steps for a certain activity, then
-        // the step counter records 50. The getStepCount method will then return 200.
-        var startingOffset = 0;
-        stepcounter.start(startingOffset, success, failure);
+        failure = function() {
+            alert("Error calling CordovaStepCounter Plugin");
+        }
 
-        // Stop the step counter
-        stepcounter.stop(success, failure);
 
         // Get the amount of steps for today (or -1 if it no data given)
-        stepcounter.getTodayStepCount(success, failure);
+        $("button#getToday").click({
+            stepcounter.getTodayStepCount(success, failure);
+        });
 
         // Get the amount of steps since the service is started (it is actually reseted to 0 when the service is killed by the system)
-        stepcounter.getStepCount(success, failure);
-
-        // Returns true/false if Android device is running >API level 19 && has the step counter API available
-        stepcounter.deviceCanCountSteps(success, failure);
+        $("button#getTotal").click({
+            stepcounter.getStepCount(success, failure);
+            stepcounter.getHistory(function(historyData) {success(historyData);
+            },
+            failure
+        );
+        });
 
         // Get the step history (JavaScript object)
         // sample result :
@@ -71,12 +72,7 @@ var app = {
         //  "2015-01-02":{"offset": 579, "steps": 789}
         //  ...
         //}
-        stepcounter.getHistory(
-            function(historyData) {
-                success(historyData);
-            },
-            failure
-        );
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
