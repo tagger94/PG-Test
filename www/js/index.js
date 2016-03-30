@@ -20,6 +20,14 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        
+        this.success = function(message) {
+            alert(message);
+        }
+
+        this.failure = function() {
+            alert("Error calling CordovaStepCounter Plugin");
+        }
     },
     // Bind Event Listeners
     //
@@ -35,13 +43,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        var success = function(message) {
-            alert(message);
-        }
-
-        var failure = function() {
-            alert("Error calling CordovaStepCounter Plugin");
-        }
+        
 
         // Start the step counter
         // startingOffset will be added to the total steps counted in this session.
