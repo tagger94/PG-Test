@@ -17,15 +17,16 @@
             <p class="event listening">Connecting to Device</p>
             <p class="event received">Device is Ready</p>
         </div>
-        <button id='getToday'>Today</button>
-        <button id='getTotal'>Total</button>
+        <button id='getToday' onclick='stepcounter.getTodayStepCount(app.success, app.failure)'>Today</button>
+        <button id='getTotal' onclick='stepcounter.getTotalStepCount(app.success, app.failure)'>Total</button>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="stepcounter.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/jquery-2.2.2.js"></script>
     <script type="text/javascript">
         app.initialize();
-
+/*
         // Get the amount of steps for today (or -1 if it no data given)
         $("button#getToday").click({
             stepcounter.getTodayStepCount(app.success, app.failure);
@@ -35,7 +36,7 @@
         $("button#getToday").click({
             stepcounter.getStepCount(app.success, app.failure);
         });
-
+*/
         // Get the step history (JavaScript object)
         // sample result :
         //{
