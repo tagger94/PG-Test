@@ -36,20 +36,19 @@
         var failure = function() {
             alert("Error calling CordovaStepCounter Plugin");
         }
-
-        // Get the amount of steps for today (or -1 if it no data given)
-        $("button#getToday").click(function() {
+        
+        function updateStuff() {
             stepcounter.getTodayStepCount(function(count) {
                 $("#1").html(count);
             }, failure);
-        });
-
-        // Get the amount of steps since the service is started (it is actually reseted to 0 when the service is killed by the system)
-        $("button#getTotal").click(function() {
+            
             stepcounter.getStepCount(function(count) {
                 $("#2").html(count);
             }, failure);
-        });
+            
+            setTimeout(updateStuff, 5000);
+            
+        }
 
         // Get the step history (JavaScript object)
         // sample result :
