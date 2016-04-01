@@ -40,7 +40,7 @@ var app = {
         // startingOffset will be added to the total steps counted in this session.
         // ie. say you have already recorded 150 steps for a certain activity, then
         // the step counter records 50. The getStepCount method will then return 200.
-        var startingOffset = 10;
+        var startingOffset = 0;
         stepcounter.start(startingOffset, success, failure);
 
         var success = function(message) {
