@@ -44,6 +44,10 @@ button {
 
 table.main {
     width: 100vw;
-    height: 80vw;
+    height: 100vw;
     text-align: center;
+}
+
+table.main tr {
+    margin: 5vw;
 }
