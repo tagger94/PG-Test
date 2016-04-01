@@ -39,11 +39,13 @@
         
         function updateStuff() {
             stepcounter.getTodayStepCount(function(count) {
-                $("#1").html(count);
+                alert(count);
+                $("div#1").html(count);
             }, failure);
             
             stepcounter.getStepCount(function(count) {
-                $("#2").html(count);
+                alert(count);
+                $("div#2").html(count);
             }, failure);
             
             setTimeout(updateStuff, 5000);
