@@ -20,10 +20,14 @@
 
     </div>
 
-    <script src="stepcounter.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="stepcounter.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.2.js"></script>
     <script type="text/javascript">
+        console.log("Starting Code");
+        
         $(document).ready(function() {
-            alert("Start");
+            console.log("Document Ready");
             // Start the step counter
             // startingOffset will be added to the total steps counted in this session.
             // ie. say you have already recorded 150 steps for a certain activity, then
@@ -44,7 +48,7 @@
 
                 stepcounter.getStepCount(success, failure);
 
-                alert("update");
+                console.log("Update");
 
                 //setTimeout(updateStuff, 5000);
 
