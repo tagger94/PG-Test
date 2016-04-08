@@ -6,14 +6,16 @@
         id        = "com.phonegap.helloworld"
         version   = "1.0.0">
 
-    <name>PG Test Base</name>
+    <name>PG Lawnmower</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        A recreation of an android project for Iowa State ComS 309 in a JavaScript base that is deployable to multiple platforms.
     </description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">
-        PhoneGap Team
+    <author>
+        Team 22
+        Alex Berns
+        Ken Kohl
     </author>
 
     <!--
