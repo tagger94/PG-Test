@@ -12,7 +12,7 @@
 
 <body>
 
-    <div id="1"></div>
+    <div id="test"></div>
 
     <table class="main">
         <tr>
@@ -70,7 +70,7 @@
         }
 
         var success = function(message) {
-            $("div#1").html(message);
+            $("div").html(message);
         }
 
         var failure = function() {
@@ -79,23 +79,18 @@
 
         function updateStuff() {
             //stepcounter.getTodayStepCount(success, failure);
-
+            alert("Update");
             stepcounter.getStepCount(success, failure);
-
-            console.log("Update");
-
-            setTimeout(updateStuff, 5000);
-
         }
 
         function beginIndex() {
             alert("Document Ready");
             app.initialize();
+            bindObjects();
 
             stepcounter.start(0, success, failure);
 
-            bindObjects();
-            updateStuff();
+            window.setInterval(updateStuff, 5000);
         }
 
         $("document").ready(beginIndex);
