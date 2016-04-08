@@ -80,19 +80,19 @@
         function updateStuff() {
             //stepcounter.getTodayStepCount(success, failure);
             alert("Update");
-            stepcounter.getStepCount(success, failure);
+            //stepcounter.getStepCount(success, failure);
         }
 
         function beginIndex() {
             alert("Document Ready");
-            app.initialize();
+            //app.initialize();
             bindObjects();
 
-            stepcounter.start(0, success, failure);
+            //stepcounter.start(0, success, failure);
 
             window.setInterval(function() {
                 alert("Update");
-                stepcounter.getStepCount(success, failure);
+                //stepcounter.getStepCount(success, failure);
             }, 5000);
         }
 
