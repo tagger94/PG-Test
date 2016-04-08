@@ -12,13 +12,7 @@
 
 <body>
     Yard Progress
-    <div id='1'>
-
-    </div>
-
-    <div id='2'>
-
-    </div>
+    <br> Step Total: <span id='1'></span>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="stepcounter.js"></script>
@@ -30,35 +24,21 @@
 
         $(document).ready(function() {
             console.log("Document Ready");
-            // Start the step counter
-            // startingOffset will be added to the total steps counted in this session.
-            // ie. say you have already recorded 150 steps for a certain activity, then
-            // the step counter records 50. The getStepCount method will then return 200.
-            var startingOffset = 0;
-            stepcounter.start(startingOffset, success, failure);
-
-            var success = function(message) {
-                $("div#1").html(message);
-            }
-
-            var failure = function() {
-                alert("Error calling CordovaStepCounter Plugin");
-            }
-
-            function updateStuff() {
-                stepcounter.getTodayStepCount(success, failure);
-
-                stepcounter.getStepCount(success, failure);
-
-                console.log("Update");
-
-                //setTimeout(updateStuff, 5000);
-
-            }
-
-            updateStuff();
-            success("YES");
+            window.setInterval(updateStuff, 1000);
         });
+
+        var success = function(message) {
+            $("#1").html(message);
+        }
+
+        var failure = function() {
+            alert("Error calling CordovaStepCounter Plugin");
+        }
+
+        function updateStuff() {
+            //stepcounter.getTodayStepCount(success, failure);
+            stepcounter.getStepCount(success, failure);
+        }
     </script>
 </body>
 
