@@ -51,10 +51,9 @@
     <script type="text/javascript" src="js/index.js"></script>
 
     <script type="text/javascript">
-        
         app.initialize();
         $("document").ready(beginIndex);
-        
+
         function bindObjects() {
             $("button#btn_yard_progress").click(function(event) {
                 window.location.assign("yard.html");
@@ -73,11 +72,11 @@
             });
         }
 
-        var success = function(message) {
+        function success(message) {
             $("div").html(message);
         }
 
-        var failure = function() {
+        function failure() {
             alert("Error calling CordovaStepCounter Plugin");
         }
 
@@ -88,17 +87,9 @@
         }
 
         function beginIndex() {
-            //alert("Document Ready");
-            
+            //Do things only on document ready
             bindObjects();
-
-            // window.setInterval(function() {
-            //     //alert("Update");
-            //     stepcounter.getStepCount(success, failure);
-            // }, 5000);
         }
-
-        
     </script>
 </body>
 

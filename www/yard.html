@@ -21,23 +21,33 @@
     <script type="text/javascript">
         app.initialize();
         console.log("Starting Code");
+        
 
-        $(document).ready(function() {
+        $(document).ready(onStart);
+        
+        function onStart() {
             console.log("Document Ready");
+            
+            //Set Update to screen
             window.setInterval(updateStuff, 1000);
-        });
+            updateStuff();
+        }
+        
+        function onStop() {
+            window.clearInterval();
+        }
 
-        var success = function(message) {
+        function stepUpdate(message) {
+            localstorage['stepcount'] = message;
             $("#1").html(message);
         }
 
-        var failure = function() {
+        function failure() {
             alert("Error calling CordovaStepCounter Plugin");
         }
 
         function updateStuff() {
-            //stepcounter.getTodayStepCount(success, failure);
-            stepcounter.getStepCount(success, failure);
+            stepcounter.getStepCount(stepUpdate, failure);
         }
     </script>
 </body>
