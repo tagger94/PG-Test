@@ -12,7 +12,7 @@
 
 <body>
 
-    <div id="test"></div>
+    <div id="test">TEST</div>
 
     <table class="main">
         <tr>
@@ -90,7 +90,10 @@
 
             stepcounter.start(0, success, failure);
 
-            window.setInterval(updateStuff, 5000);
+            window.setInterval(function() {
+                alert("Update");
+                stepcounter.getStepCount(success, failure);
+            }, 5000);
         }
 
         $("document").ready(beginIndex);
