@@ -35,13 +35,11 @@ var app = {
     onDeviceReady: function() {
         //app.receivedEvent('deviceready');
         //alert("READY");
-
-        
-        
-
-
-        
-
+        stepcounter.start(0, function() {
+            alert("Step Started");
+        }, function() {
+            alert("Failed to start Step");
+        });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {

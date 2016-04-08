@@ -51,6 +51,10 @@
     <script type="text/javascript" src="js/index.js"></script>
 
     <script type="text/javascript">
+        
+        app.initialize();
+        $("document").ready(beginIndex);
+        
         function bindObjects() {
             $("button#btn_yard_progress").click(function(event) {
                 window.location.assign("yard.html");
@@ -85,10 +89,8 @@
 
         function beginIndex() {
             alert("Document Ready");
-            //app.initialize();
+            
             bindObjects();
-
-            //stepcounter.start(0, success, failure);
 
             window.setInterval(function() {
                 alert("Update");
@@ -96,7 +98,7 @@
             }, 5000);
         }
 
-        $("document").ready(beginIndex);
+        
     </script>
 </body>
 
