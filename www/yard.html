@@ -32,7 +32,7 @@
             stepcounter.start(startingOffset, success, failure);
 
             var success = function(message) {
-                alert(message);
+                $("div#1").html(message);
             }
 
             var failure = function() {
@@ -46,11 +46,12 @@
 
                 alert("update");
 
-                setTimeout(updateStuff, 5000);
+                //setTimeout(updateStuff, 5000);
 
             }
 
             updateStuff();
+            success("YES");
         });
     </script>
 </body>
