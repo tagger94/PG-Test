@@ -22,23 +22,34 @@
         app.initialize();
         console.log("Starting Code");
         
-
         $(document).ready(onStart);
         
         function onStart() {
             console.log("Document Ready");
             
+            onResume();
+        }
+        
+        function onResume() {
             //Set Update to screen
-            window.setInterval(updateStuff, 1000);
-            updateStuff();
+            updateScreen();
+            window.setInterval(updateScreen, 1000);
+        }
+        
+        function onPause() {
+            window.clearInterval();
         }
         
         function onStop() {
-            window.clearInterval();
+            onPause();
+        }
+        
+        function updateScreen() {
+            stepcounter.getStepCount(stepUpdate, failure);
         }
 
         function stepUpdate(message) {
-            localstorage['stepcount'] = message;
+            localStorage['stepcount'] = message;
             $("#1").html(message);
         }
 
@@ -46,9 +57,7 @@
             alert("Error calling CordovaStepCounter Plugin");
         }
 
-        function updateStuff() {
-            stepcounter.getStepCount(stepUpdate, failure);
-        }
+        
     </script>
 </body>
 
