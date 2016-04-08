@@ -15,40 +15,42 @@
     <div id='1'>
 
     </div>
-    
+
     <div id='2'>
-        
+
     </div>
 
     <script src="stepcounter.js"></script>
     <script type="text/javascript">
-        // Start the step counter
-        // startingOffset will be added to the total steps counted in this session.
-        // ie. say you have already recorded 150 steps for a certain activity, then
-        // the step counter records 50. The getStepCount method will then return 200.
-        var startingOffset = 0;
-        stepcounter.start(startingOffset, success, failure);
+        $(document).ready(function() {
+            // Start the step counter
+            // startingOffset will be added to the total steps counted in this session.
+            // ie. say you have already recorded 150 steps for a certain activity, then
+            // the step counter records 50. The getStepCount method will then return 200.
+            var startingOffset = 0;
+            stepcounter.start(startingOffset, success, failure);
 
-        var success = function(message) {
-            alert(message);
-        }
+            var success = function(message) {
+                alert(message);
+            }
 
-        var failure = function() {
-            alert("Error calling CordovaStepCounter Plugin");
-        }
-        
-        function updateStuff() {
-            stepcounter.getTodayStepCount(success, failure);
-            
-            stepcounter.getStepCount(success, failure);
-            
-            alert("update");
-            
-            setTimeout(updateStuff, 5000);
-            
-        }
-        
-        updateStuff();
+            var failure = function() {
+                alert("Error calling CordovaStepCounter Plugin");
+            }
+
+            function updateStuff() {
+                stepcounter.getTodayStepCount(success, failure);
+
+                stepcounter.getStepCount(success, failure);
+
+                alert("update");
+
+                setTimeout(updateStuff, 5000);
+
+            }
+
+            updateStuff();
+        });
     </script>
 </body>
 
