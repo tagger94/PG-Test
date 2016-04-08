@@ -38,15 +38,11 @@
         }
         
         function updateStuff() {
-            stepcounter.getTodayStepCount(function(count) {
-                alert(count);
-                $("div#1").html(count);
-            }, failure);
+            stepcounter.getTodayStepCount(success, failure);
             
-            stepcounter.getStepCount(function(count) {
-                alert(count);
-                $("div#2").html(count);
-            }, failure);
+            stepcounter.getStepCount(success, failure);
+            
+            alert("update");
             
             setTimeout(updateStuff, 5000);
             
