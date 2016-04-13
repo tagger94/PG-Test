@@ -204,7 +204,6 @@ var ProgressCircle = React.createClass({
 
 //Actual Code Time
 
-
 if(!stepcounter){
     var stepcounter = {};
     stepcounter.steps = 0;
