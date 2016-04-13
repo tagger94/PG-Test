@@ -16,35 +16,55 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#42b926;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    width:100%;
-    font-size: 5vw;
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color: #42b926;
+    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    font-size: 3vw;
 }
 
 button {
     border: solid black .5vw;
     border-radius: 4vw;
     padding: 2vw;
-    font-size: 5vw;
+    font-size: 3vw;
     width: 50vw;
     background-color: #e7e520;
-    text-transform:uppercase;
+    text-transform: uppercase;
+}
+
+.display {
+    border: solid black .5vw;
+    border-radius: 4vw;
+    padding: 2vw;
+    font-size: 3vw;
+    width: 50vw;
+    background-color: #8AD819;
+}
+
+#progressCircle {
+    margin: .2vw;
+    width: 30vw;
+    height: 30vw;
 }
 
 div {
-    font-size: 5vw;
+    font-size: 3vw;
 }
 
 table.main {
