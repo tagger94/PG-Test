@@ -2,33 +2,119 @@
 /*global ReactDOM*/
 /*global User*/
 
-var HomePage = React.createClass({
-    render: function() {
-        const style = {
-            
-        };
+var Parent = React.createClass({
+
+    getInitialState: function () {
+        this.pages = new Pages ();
+        this.props.controller.updatePage = this.updatePage;
         
+        return {
+            active: this.pages.main
+        };
+    },
+    
+    updatePage: function (newPage) {
+        this.setState({
+            active : newPage
+        });
+    },
+    
+    handleClick: function () {
+        var page = this.state.active;
+        
+        if(page === this.pages.hardwareStore || page === this.pages.gnomes || page === this.pages.testField) {
+            this.updatePage(this.pages.garage);
+        } else {
+            this.updatePage(this.pages.main);
+        }
+        
+    },
+
+    render: function () {
+
+        var active = this.state.active;
+
         return (
-            <div>
-                <Navigation stepper={this.props.stepper}/>
+            <div className="parent">
+                <div className="topbar">
+                    <input type="image" src="img/back.png" alt="Back" onClick={this.handleClick}/>
+                    {this.state.active}
+                </div>
+                
+                <div className="child">
+                {active === this.pages.main ? (
+                    <span>
+                        <HomePage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.yard ? (
+                    <span>
+                        <YardPage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.garage ? (
+                    <span>
+                        <GaragePage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.hardwareStore ? (
+                    <span>
+                        <HardwareStorePage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.gnomes ? (
+                    <span>
+                        <GnomesPage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.testField ? (
+                    <span>
+                        <TestFieldPage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.profile ? (
+                    <span>
+                        <ProfilePage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.graph ? (
+                    <span>
+                        <GraphPage controller={this.props.controller}/>
+                    </span>
+                ) : active === this.pages.settings ? (
+                    <span>
+                        <SettingsPage controller={this.props.controller}/>
+                    </span>
+                ) : (
+                    <span>
+                        <h1>ERROR</h1>
+                        <HomePage />
+                    </span>
+                )}
+                </div>
+                
             </div>
         );
-    }
+
+     }
+
 });
 
-var Navigation = React.createClass({
+var HomePage = React.createClass({
     yardClick: function(event) {
-        console.log(this.props);
-        ReactDOM.render(
-            <YardPage stepper={this.props.stepper}/>,
-            document.getElementById("view")
-        );
+        this.props.controller.updatePage(this.props.controller.pages.yard);
+    },
+    
+    garageClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.garage);
+    },
+    
+    profileClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.profile);
+    },
+    
+    graphClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.graph);
+    },
+    
+    settingsClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.settings);
     },
 
     render: function() {
-        const style = {
-            
-        };
         
         return (
             <table className="navigation">
@@ -40,22 +126,22 @@ var Navigation = React.createClass({
         </tr>
         <tr>
             <td>
-                <button >Garage</button>
+                <button onClick={this.garageClick}>Garage</button>
             </td>
         </tr>
         <tr>
             <td>
-                <button id='btn_profile'>Profile</button>
+                <button onClick={this.profileClick}>Profile</button>
             </td>
         </tr>
         <tr>
             <td>
-                <button id='btn_graph'>Graph</button>
+                <button onClick={this.graphClick}>Graph</button>
             </td>
         </tr>
         <tr>
             <td>
-                <button id='btn_settings'>Settings</button>
+                <button onClick={this.settingsClick}>Settings</button>
             </td>
         </tr>
         </tbody>
@@ -66,41 +152,179 @@ var Navigation = React.createClass({
 
 var YardPage = React.createClass({
     getInitialState: function() {
-        return {user: new User()};
+        return new User();
     },
-    
-    updateMoney: function(){
-        this.state.user.money++;
-        this.setState(this.state.user);
-    },
-    
-    updateStep: function(newTotal) {
-        this.state.user.stepTotal = newTotal;
-        this.setState(this.state.user);
-    },
-    
-    periodicStepUpdate: function() {
-        this.props.stepper.getStepCount(this.updateStep);
-    },
-    
+
     componentWillMount: function() {
-        this.updateMoney();
-        this.periodicStepUpdate();
-        window.setInterval(this.updateMoney, 1000);
-        window.setInterval(this.periodicStepUpdate, 1000);
+        //Set state
+        this.setState(this.props.controller.user);
+        this.stepInterval = window.setInterval(this.periodicStepUpdate, 1000);
+        console.log(this.props.controller.user.stepCurrent);
+    },
+    
+    componentWillUnmount: function() {
+        window.clearInterval(this.stepInterval);
     },
     
     render: function() {
-        const style = {
-            
-        };
+        return (
+            <div className="yard">
+                <Mower mower={this.state.mower} />
+                <Money money={this.state.money} />
+                <ProgressSimple current={this.state.stepCurrent - this.state.goalTotal} goal={this.state.goalCurrent} />
+                <ProgressCircle controller={this.props.controller} />
+            </div>
+        );
+    },
+    
+    updateMoney: function(amount){
+        this.props.controller.user.money += amount;
+        this.setState(this.props.controller.user);
+    },
+    
+    periodicStepUpdate: function() {
+        this.props.controller.stepper.getStepCount(this.updateStep);
+    },
+    
+    updateStep: function(newTotal) {
+        var user = this.props.controller.user;
+        user.stepCurrent = newTotal;
         
+        //Check Goal Completion
+        if(user.stepCurrent - user.goalTotal >= user.goalCurrent) {
+            console.log(user);
+            
+            //Add current goal to running total
+            user.goalTotal += user.goalCurrent;
+            
+            //Double Step Goal;
+            user.goalCurrent *= 2;
+            
+            //Award Money
+            this.updateMoney(20);
+        }
+        
+        this.setState(user);
+    },
+});
+
+var GaragePage = React.createClass({
+    getInitialState: function() {
+        return new User();
+    },
+    
+    componentWillMount: function() {
+        //Set state
+        this.setState(this.props.controller.user);
+    },
+    
+    hardwareClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.hardwareStore);
+    },
+    
+    gnomesClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.gnomes);
+    },
+    
+    testFieldClick: function(event) {
+        this.props.controller.updatePage(this.props.controller.pages.testField);
+    },
+
+    render: function() {
+        return (
+            <div className="garage">
+                <Money money={this.state.money} />
+                
+                <span>
+                    <div className="spacer"/>
+                    <input type="image" src="img/hardwarestore.png" alt="HS" onClick={this.hardwareClick}/>
+                    <div className="spacer"/>
+                    <input type="image" src="img/gnome_male.png" alt="GN" onClick={this.gnomesClick}/>
+                    <div className="spacer"/>
+                    <input type="image" src="img/fence.png" alt="TF" onClick={this.testFieldClick}/>
+                    <div className="spacer"/>
+                </span>
+                
+                <span>
+                    <MowerGraphic img="img/mower.png"/>
+                    <Mower mower={this.state.mower} />
+                </span>
+                
+            </div>
+        );
+    }
+});
+
+var HardwareStorePage = React.createClass({
+    getInitialState: function() {
+        return new User();
+    },
+    
+    componentWillMount: function() {
+        //Set state
+        this.setState(this.props.controller.user);
+    },
+    
+    render: function() {
         return (
             <div>
-                <Mower mower={this.state.user.mower} />
-                <Money money={this.state.user.money} />
-                <ProgressSimple total={this.state.user.stepTotal} />
-                <ProgressCircle stepper={this.props.stepper} />
+                <Mower mower={this.state.mower} />
+                <Money money={this.state.money} />
+            </div>
+        );
+    }
+});
+
+var GnomesPage = React.createClass({
+
+    render: function() {
+        return (
+            <div>
+                <h1>NOT IMPLEMENTED</h1>
+            </div>
+        );
+    }
+});
+
+var TestFieldPage = React.createClass({
+
+    render: function() {
+        return (
+            <div>
+                <h1>NOT IMPLEMENTED</h1>
+            </div>
+        );
+    }
+});
+
+var ProfilePage = React.createClass({
+
+    render: function() {
+        return (
+            <div>
+                <h1>NOT IMPLEMENTED</h1>
+            </div>
+        );
+    }
+});
+
+var GraphPage = React.createClass({
+
+    render: function() {
+        return (
+            <div>
+                <h1>NOT IMPLEMENTED</h1>
+            </div>
+        );
+    }
+});
+
+var SettingsPage = React.createClass({
+
+    render: function() {
+        return (
+            <div>
+                <h1>NOT IMPLEMENTED</h1>
             </div>
         );
     }
@@ -109,17 +333,19 @@ var YardPage = React.createClass({
 var Mower = React.createClass({
 
     render: function() {
-        const style = {
-            border: 'solid black .5vw',
-            borderRadius: '4vw',
-            padding: '2vw',
-            fontSize: '3vw',
-            width: '50vw',
-            backgroundColor: '#8AD819'
-        };
-        
         return (
             <div className="display">Mower: {this.props.mower}</div>
+        );
+    }
+});
+
+var MowerGraphic = React.createClass({
+    
+    render: function() {
+        return (
+            <div className="mowergraphic">
+                <img className="display" src={this.props.img}/>
+            </div>
         );
     }
 });
@@ -127,15 +353,6 @@ var Mower = React.createClass({
 var Money = React.createClass({
 
     render: function() {
-        const style = {
-            border: 'solid black .5vw',
-            borderRadius: '4vw',
-            padding: '2vw',
-            fontSize: '3vw',
-            width: '50vw',
-            backgroundColor: '#8AD819'
-        };
-        
         return (
             <div className="display">${this.props.money}</div>
         );
@@ -145,57 +362,49 @@ var Money = React.createClass({
 var ProgressSimple = React.createClass({
 
     render: function() {
-        const style = {
-            border: 'solid black .5vw',
-            borderRadius: '4vw',
-            padding: '2vw',
-            fontSize: '3vw',
-            width: '50vw',
-            backgroundColor: '#8AD819'
-        };
-        
         return (
-            <div className="display">Step Total: {this.props.total}</div>
+            <div className="display">Steps: {this.props.current} / {this.props.goal}</div>
         );
     }
 });
 
 var ProgressCircle = React.createClass({
     
-    getInitialState: function() {
-        return {total: 0, goal: 1000};
-    },
-    
-    updateStep: function(newTotal) {
-        this.state.total = newTotal;
-        this.setState(this.state.user);
-        this.circle.animate(this.state.total / this.state.goal);
-        this.circle.setText(Math.round(this.state.total / this.state.goal * 100) + "%");
-    },
-    
-    periodicStepUpdate: function() {
-        this.props.stepper.getStepCount(this.updateStep);
-    },
-    
     componentDidMount: function() {
+        //Draw Circle
         this.circle = new ProgressBar.Circle(document.getElementById('progressCircle'), {
             color: '#FCB03C',
             strokeWidth: 2,
             fill: '#aaa',
         });
         
-        this.periodicStepUpdate();
-        
-        window.setInterval(this.periodicStepUpdate, 1000);
+        //Update View
+        this.updateProgress();
+        this.stepInterval = window.setInterval(this.updateProgress, 1000);
     },
 
     render: function() {
-        const style = {
-            
-        };
-        
         return (
             <div id="progressCircle"></div>
+        );
+    },
+    
+    updateProgress: function() {
+        var user = this.props.controller.user;
+        var temp = (user.stepCurrent - user.goalTotal) / user.goalCurrent;
+        //Animate Progress Bar
+        this.circle.animate(temp);
+        this.circle.setText(Math.round(temp * 100) + "%");
+    },
+});
+
+var Upgrades = React.createClass({
+
+    render: function() {
+        return (
+            <div>
+                
+            </div>
         );
     }
 });
@@ -204,21 +413,9 @@ var ProgressCircle = React.createClass({
 
 //Actual Code Time
 
-if(!stepcounter){
-    var stepcounter = {};
-    stepcounter.steps = 0;
-    stepcounter.getStepCount = function(success, failure) {
-        this.steps++
-        if(true) {
-            success(this.steps);
-        } else {
-            failure();
-        }
-        
-    };
-}
+
 
 ReactDOM.render(
-    <YardPage stepper = {stepcounter} />,
+    <Parent controller = {controller} />,
     document.getElementById("view")
 );

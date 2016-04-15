@@ -32,20 +32,53 @@ body {
     background-color: #42b926;
     font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     height: 100%;
-    margin: 0px;
-    padding: 0px;
     width: 100%;
+    padding: 0vw;
+    margin: 0vw;
     font-size: 3vw;
 }
 
-button {
+.topbar {
+    background-color: black;
+    width: 100%;
+    height: 4vw;
+    font-size: 4vw;
+    text-transform: capitalize;
+    color: white;
+    padding: 1vw;
+    text-align: left;
+}
+
+.topbar input {
+    height: 2vw;
+    margin: 1vw;
+}
+
+.child button,
+.child input {
     border: solid black .5vw;
-    border-radius: 4vw;
-    padding: 2vw;
-    font-size: 3vw;
-    width: 50vw;
+    border-radius: 2vw;
+    padding: 1vw;
+    font-size: 2.8vw;
     background-color: #e7e520;
     text-transform: uppercase;
+}
+
+.navigation button {
+    width: 50vw;
+}
+
+.garage input, .spacer{
+    width: 5vw;
+    height: 5vw;
+}
+
+.garage span {
+    float:left;
+}
+
+.mowergraphic {
+    width: 60vw;
 }
 
 .display {
@@ -59,8 +92,8 @@ button {
 
 #progressCircle {
     margin: .2vw;
-    width: 30vw;
-    height: 30vw;
+    width: 50vw;
+    height: 50vw;
 }
 
 div {
