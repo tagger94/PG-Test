@@ -30,28 +30,29 @@ body {
     -webkit-user-select: none;
     /* prevent copy paste, to allow, change 'none' to 'text' */
     background-color: #42b926;
-    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace, 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     height: 100%;
     width: 100%;
     padding: 0vw;
     margin: 0vw;
-    font-size: 3vw;
+    font-size: medium;
 }
 
 .topbar {
     background-color: black;
     width: 100%;
-    height: 4vw;
-    font-size: 4vw;
+    height: 5%;
+    font-size: medium;
     text-transform: capitalize;
     color: white;
-    padding: 1vw;
+    padding: 1%;
     text-align: left;
 }
 
 .topbar input {
-    height: 2vw;
-    margin: 1vw;
+    height: 50%;
+    margin-right: 5%;
+    margin-left: 2%;
 }
 
 .child button,
@@ -59,34 +60,109 @@ body {
     border: solid black .5vw;
     border-radius: 2vw;
     padding: 1vw;
-    font-size: 2.8vw;
+    font-size: large;
     background-color: #e7e520;
     text-transform: uppercase;
 }
 
+a.info {
+    border: solid black .5vw;
+    border-radius: 100%;
+    padding: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    font-size: small;
+    background-color: #e7e520;
+    text-transform: none;
+    float: right;
+}
+
+td.right {
+    text-align: right;
+}
+
+.buy button{
+    width: 100%;
+}
+
+.navigation {
+    width: 100%;
+    text-align: center;
+    padding-top: 15vw;
+    padding-bottom: 15vw;
+}
+
 .navigation button {
-    width: 50vw;
+    width: 50%;
+    font-size: large
 }
 
-.garage input, .spacer{
-    width: 5vw;
-    height: 5vw;
+.garage input {
+    height: 10vw;
+    width: 10vw;
+    margin: 2vw;
 }
 
-.garage span {
-    float:left;
+.garagenav {
+    float: left;
+}
+
+.garagestat {
+    float: right;
+    height: 100%;
+    width: 80%;
 }
 
 .mowergraphic {
-    width: 60vw;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-.display {
+.mowerstat {
+    margin: 2%;
+    border: solid black 2vw;
+}
+
+.areacalc td {
+    border: solid black .2vw;
+    min-width: 20vw;
+}
+
+.tdcenter {
+    text-align: right;
+}
+
+.image {
+    overflow: hidden;
+    text-align: center;
+    border-radius: 10vw;
+    border: solid black 2vw;
+    padding: 3vw;
+    margin: 1vw;
+    height:30%;
+    /*width: 50vw;*/
+    background-color: #8AD819;
+}
+
+.image > img {
+    width: 100%
+}
+
+#battery {
+    background-color: #B87333;
+    border: solid black .5vw;
+    border-radius: 4vw;
+    overflow: hidden;
+}
+
+.display,
+.money {
     border: solid black .5vw;
     border-radius: 4vw;
     padding: 2vw;
-    font-size: 3vw;
-    width: 50vw;
+    margin: 1vw;
+    font-size: x-large;
+    /*width: 50vw;*/
     background-color: #8AD819;
 }
 
@@ -96,16 +172,64 @@ body {
     height: 50vw;
 }
 
-div {
-    font-size: 3vw;
-}
-
 table.main {
-    width: 100vw;
-    height: 100vw;
+    width: 100%;
+    height: 100%;
     text-align: center;
 }
 
 table.main tr {
     margin: 5vw;
+}
+
+table.upgrade {
+    width: 100%;
+    font-size: medium;
+}
+
+ul {
+    display: table;
+    table-layout: fixed;
+    padding-left: 0vw;
+    height: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+li {
+    text-align: center;
+    display: table-row;
+}
+
+.garageDisplay {
+    height: 100vw;
+    text-align: left;
+}
+
+.money {
+    text-align: right;
+}
+
+.buybox {
+    background-color: #e78220;
+    border: black solid 2vw;
+    border-radius: 5vw;
+    padding: 5vw;
+    margin: 2vw;
+}
+
+.title {
+    font-size: x-large;
+    float: left;
+}
+
+.value {
+    font-size: larger;
+    width: 100%;
+    text-align: center;
+}
+
+.buy {
+    width: 100%;
+    margin: auto;
 }

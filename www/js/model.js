@@ -1,11 +1,6 @@
 function User() {
     this.name = "John Deer";
     this.money = 0;
-    this.stepCurrent = 0;
-    this.goalCurrent = 10;
-    this.goalTotal = 0;
-    this.mower = "Mower";
-    this.mult = 1;
 }
 
 function Pages() {
